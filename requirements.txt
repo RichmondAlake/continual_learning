@@ -1,0 +1,6 @@
+# Course 1: Build Self-Improving Agents with Memory, Traces, and Skills
+# The notebooks need the MemoRizz release after 0.17.24. Until it is on PyPI, install this
+# (for MemoRizz's dependencies) and export MEMORIZZ_SRC=<memorizz checkout>/src (see README).
+memorizz[ui]
+python-dotenv
+jupyterlab

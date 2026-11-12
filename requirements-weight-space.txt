@@ -1,0 +1,8 @@
+# Course 2: Continual Learning Beyond the Context Window (notebooks planned; see its README)
+torch
+transformers
+sentence-transformers
+peft
+datasets
+accelerate
+memorizz[finetune]
