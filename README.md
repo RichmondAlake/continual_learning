@@ -52,6 +52,7 @@ self_improving_agents/       Course 1: five notebooks on continual learning in t
 beyond_the_context_window/   Course 2: weight-space notebooks (in progress; see its README)
 data/calderwood/             Support traces, memory units, SFT rows and held-out questions, with their generator
 scripts/                     sync_token_space.py: refresh course 1's notebooks from the MemoRizz repository
+slides/                      Agent Memory Engineering: Towards Continual Learning in Token Space (deck)
 ```
 
 ## Setup
