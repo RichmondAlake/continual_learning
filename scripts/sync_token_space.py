@@ -3,8 +3,8 @@
     python scripts/sync_token_space.py ~/Desktop/memorizz
 
 The five notebooks are written in the MemoRizz repository, in examples/continual_learning.
-This copies them with their images and calderwood_world.py, then makes two changes so they
-run outside that repository:
+This copies them with their images, and calderwood_world.py into both course folders, then makes
+two changes so they run outside that repository:
 
 1. The setup cell looked for MemoRizz's source tree above the notebook. Here MemoRizz is the
    installed package, or a source checkout named by the MEMORIZZ_SRC environment variable.
@@ -70,7 +70,9 @@ def main() -> None:
     for name in NOTEBOOKS:
         notebook = patch(json.loads((source / name).read_text()), name)
         (target / name).write_text(json.dumps(notebook, indent=1, ensure_ascii=False) + "\n")
-    shutil.copy2(source / "calderwood_world.py", target / "calderwood_world.py")
+    for folder in (target, target.parent / "beyond_the_context_window"):   # one world for both courses
+        folder.mkdir(exist_ok=True)
+        shutil.copy2(source / "calderwood_world.py", folder / "calderwood_world.py")
     shutil.copytree(source / "images", target / "images", dirs_exist_ok=True)
     print(f"copied {len(NOTEBOOKS)} notebooks, calderwood_world.py and images/ into {target}")
 
