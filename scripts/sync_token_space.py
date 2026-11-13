@@ -8,7 +8,8 @@ two changes so they run outside that repository:
 
 1. The setup cell looked for MemoRizz's source tree above the notebook. Here MemoRizz is the
    installed package, or a source checkout named by the MEMORIZZ_SRC environment variable.
-2. Links to files elsewhere in the MemoRizz repository point at its GitHub pages instead.
+2. Links to files elsewhere in the MemoRizz repository point at its GitHub pages instead,
+   and the headings in TEXT are reworded.
 
 The store the notebooks write (calderwood_store/) is not copied.
 """
@@ -28,6 +29,9 @@ MEMORIZZ_GITHUB = "https://github.com/RichmondAlake/memorizz/blob/main"
 LINKS = {
     "](../../docs/guides/continual-learning.md)": f"]({MEMORIZZ_GITHUB}/docs/guides/continual-learning.md)",
     "](continual_learning_guide.ipynb)": f"]({MEMORIZZ_GITHUB}/examples/continual_learning/continual_learning_guide.ipynb)",
+}
+TEXT = {   # wording for this repository's readers
+    "### ⭐ The webinar path": "### ⭐ The live path",
 }
 SOURCE_TREE = """# 1. MemoRizz from this repository's source tree (pip install after the release).
 REPO = next(
@@ -53,7 +57,7 @@ def patch(notebook: dict, name: str) -> dict:
             source = source.replace(SOURCE_TREE, INSTALLED_OR_SRC)
             setup_cells += 1
         if cell["cell_type"] == "markdown":
-            for old, new in LINKS.items():
+            for old, new in {**LINKS, **TEXT}.items():
                 source = source.replace(old, new)
         cell["source"] = source.splitlines(keepends=True)
     if setup_cells != 1:

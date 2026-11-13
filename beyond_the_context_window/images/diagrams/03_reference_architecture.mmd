@@ -1,0 +1,18 @@
+flowchart TB
+    classDef user fill:#1a0714,stroke:#f472b6,stroke-width:2px,color:#fce7f3
+    classDef llm fill:#160a2b,stroke:#c084fc,stroke-width:2px,color:#f3e8ff
+    classDef slm fill:#2a1204,stroke:#fb923c,stroke-width:3px,color:#ffedd5
+    classDef db fill:#03210f,stroke:#34d399,stroke-width:2px,color:#d1fae5
+    classDef data fill:#042f2e,stroke:#2dd4bf,stroke-width:2px,color:#ccfbf1
+    classDef gate fill:#241400,stroke:#fbbf24,stroke-width:2px,color:#fef3c7
+    classDef risk fill:#2a0710,stroke:#fb7185,stroke-width:2px,color:#ffe4e6
+    Q["<b>Handler's question</b>"]:::user
+    Q --> A["<b>(a) gpt-6.1-sol alone</b><br/>question only<br/>knows nothing of Calderwood"]:::risk
+    Q --> E["<b>Embedder</b><br/>ACTIVE version from notebook 02"]:::llm
+    E --> I[("<b>Memory index</b><br/>48 units")]:::db
+    I --> B["<b>(b) gpt-6.1-sol + memory</b><br/>top 3 units in context<br/>knowledge in the context"]:::llm
+    T["<b>sft.jsonl</b><br/>250 rows from notebook 01"]:::data -. "LoRA training" .-> C
+    Q --> C["<b>(c) Qwen3-0.6B + LoRA v1</b><br/>local · $0 per call<br/>knowledge in the adapter"]:::slm
+    I -- "best unit's score" --> R{{"<b>Router · Part 6</b><br/>score ≥ threshold → (c)<br/>otherwise → (b)"}}:::gate
+    C --> R
+    B --> R

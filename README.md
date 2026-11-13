@@ -39,7 +39,7 @@ Its knowledge changes in rounds, which is what the agent has to keep up with:
 |---|---|---|
 | 1 | September 2026 | The baseline: Drop in use, Grade 1 payout authority £2,500, an Amber Pack due within 2 working days |
 | 2 | January 2027 | Compass replaces Drop; Grade 1 authority rises to £3,000; the Amber Pack deadline becomes 3 working days; payments over £25,000 need an SRT clearance |
-| 3 | April 2027 | The motor total loss deadline falls from 10 to 7 working days |
+| 3 | April 2027 | The motor total loss deadline falls from 10 to 7 working days; PCL customers must get a response within 1 working hour instead of 2 |
 
 The people, systems, codes and limits live in one module,
 [`self_improving_agents/calderwood_world.py`](self_improving_agents/calderwood_world.py), and the
@@ -49,9 +49,11 @@ support traces and training data in [`data/calderwood/`](data/calderwood/).
 
 ```
 self_improving_agents/       Course 1: five notebooks on continual learning in token space (MemoRizz)
-beyond_the_context_window/   Course 2: weight-space notebooks (in progress; see its README)
+beyond_the_context_window/   Course 2: four notebooks on continual learning in weight space (PyTorch, PEFT)
+part1/                       Course 2: two guided Colab notebooks on Qwen3.5-27B (Unsloth, A100), with their data
 data/calderwood/             Support traces, memory units, SFT rows and held-out questions, with their generator
-scripts/                     sync_token_space.py: refresh course 1's notebooks from the MemoRizz repository
+scripts/                     sync_token_space.py: refresh course 1's notebooks from the MemoRizz repository;
+                             diagrams/render.py: render course 2's Mermaid diagrams into its notebooks
 slides/                      Agent Memory Engineering: Towards Continual Learning in Token Space (deck)
 ```
 
@@ -67,6 +69,12 @@ pip install -r requirements.txt                    # course 1
 pip install -r requirements-weight-space.txt       # course 2 (PyTorch, Hugging Face, PEFT)
 cp .env.example .env                               # then add your OpenAI key
 ```
+
+With [uv](https://docs.astral.sh/uv/), course 2's environment is
+`uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python -r requirements-weight-space.txt`.
+Course 2 was tested on Python 3.12. Its models (`BAAI/bge-small-en-v1.5`, `Qwen/Qwen3-0.6B`,
+optionally `Qwen/Qwen3-Embedding-0.6B`) and the BEIR SciFact benchmark download from the Hugging Face
+Hub on first use, and only its notebook 03 needs the OpenAI key.
 
 Course 1 uses features from the **MemoRizz release after 0.17.24** (the refine cycle, tool learning,
 dated entity history). Until that release is on PyPI, point the notebooks at a MemoRizz checkout:
@@ -86,4 +94,5 @@ Database; see the [MemoRizz docs](https://github.com/RichmondAlake/memorizz).
 |---|---|
 | Course 1 notebooks 01–05 | Written and run with saved outputs, in the MemoRizz repository (`examples/continual_learning`); copied here by `scripts/sync_token_space.py` |
 | Calderwood data | Traces, memory units, 250 SFT rows and 61 held-out questions, with the generator |
-| Course 2 notebooks | Planned, following the course outline; see [`beyond_the_context_window/`](beyond_the_context_window/) |
+| Course 2 notebooks 01–04 | Built on an Apple Silicon Mac (16 GB); 01–03 saved with their outputs, 04 without; see [`beyond_the_context_window/`](beyond_the_context_window/) |
+| Part 1: Qwen3.5-27B notebooks | Two guided Colab notebooks (traces to weights; three rounds with replay) and the round 1 data; notebook 02's round 1–3 data (`calderwood_data_v2.zip`) is still to add; see [`part1/`](part1/) |

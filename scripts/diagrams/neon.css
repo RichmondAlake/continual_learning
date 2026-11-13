@@ -1,0 +1,17 @@
+/* Neon glow for the classDef palette used in the weight-space diagrams. */
+.node rect, .node polygon, .node circle, .node path, .node ellipse { filter: drop-shadow(0 0 3px currentColor); }
+.node.user  > * { color: #f472b6; }
+.node.app   > * { color: #22d3ee; }
+.node.llm   > * { color: #c084fc; }
+.node.slm   > * { color: #fb923c; }
+.node.db    > * { color: #34d399; }
+.node.mem   > * { color: #facc15; }
+.node.tool  > * { color: #60a5fa; }
+.node.code  > * { color: #a3e635; }
+.node.gate  > * { color: #fbbf24; }
+.node.risk  > * { color: #fb7185; }
+.node.data  > * { color: #2dd4bf; }
+.flowchart-link { filter: drop-shadow(0 0 2px #ff4fd8); }
+.edgeLabel, .edgeLabel p, .edgeLabel span { color: #fde047 !important; background-color: #000000 !important; }
+.cluster rect { filter: drop-shadow(0 0 2px #475569); }
+.nodeLabel { font-weight: 500; }

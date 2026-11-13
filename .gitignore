@@ -11,3 +11,9 @@ data/calderwood/generator/data/
 runs/
 checkpoints/
 models/
+
+# Weight-space notebooks: trained weights and trainer scratch (datasets/ is small and committed)
+*.safetensors
+*.pt
+*.bin
+*.npz

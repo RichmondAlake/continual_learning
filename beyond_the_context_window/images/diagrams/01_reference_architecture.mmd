@@ -1,0 +1,20 @@
+flowchart TB
+    classDef user fill:#1a0714,stroke:#f472b6,stroke-width:2px,color:#fce7f3
+    classDef app fill:#061a22,stroke:#22d3ee,stroke-width:2px,color:#cffafe
+    classDef llm fill:#160a2b,stroke:#c084fc,stroke-width:2px,color:#f3e8ff
+    classDef db fill:#03210f,stroke:#34d399,stroke-width:2px,color:#d1fae5
+    classDef mem fill:#221d03,stroke:#facc15,stroke-width:2px,color:#fef9c3
+    classDef code fill:#0f1a05,stroke:#a3e635,stroke-width:2px,color:#ecfccb
+    classDef data fill:#042f2e,stroke:#2dd4bf,stroke-width:2px,color:#ccfbf1
+    classDef slm fill:#2a1204,stroke:#fb923c,stroke-width:3px,color:#ffedd5
+    H["<b>Handlers and senior handlers</b><br/>Tom, Priya, Gwen, Dev"]:::user --> A["<b>Ada</b><br/>claims support assistant"]:::app
+    A --> T[("<b>traces.jsonl</b><br/>37 sessions · 624 events")]:::db
+    A --> M[("<b>memory_units.jsonl</b><br/>48 units written by Ada")]:::mem
+    T --> S["<b>1 · Select</b><br/>split sessions into exchanges<br/>keep the ones a person confirmed<br/>strip claim refs and customers"]:::code
+    M --> S
+    S --> D1["<b>sft.jsonl</b><br/>question → answer"]:::data
+    S --> D2["<b>contrastive.jsonl</b><br/>question · memory unit · hard negatives"]:::data
+    S --> D3["<b>preference.jsonl</b><br/>chosen: senior's answer<br/>rejected: 'I can't find that'"]:::data
+    D2 --> N2["<b>02</b> fine-tune the embedder<br/>bge-small-en-v1.5"]:::llm
+    D1 --> N3["<b>03 and 04</b> train a small model<br/>Qwen3-0.6B + LoRA"]:::slm
+    D3 --> N4["<b>03</b> routing and<br/>preference training"]:::llm

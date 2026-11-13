@@ -1,8 +1,18 @@
-# Course 2: Continual Learning Beyond the Context Window (notebooks planned; see its README)
-torch
-transformers
-sentence-transformers
-peft
-datasets
-accelerate
-memorizz[finetune]
+# Course 2: Continual Learning Beyond the Context Window (beyond_the_context_window/)
+# Tested with Python 3.12, torch 2.13 (MPS), transformers 5.19, sentence-transformers 6.1, peft 0.21.
+torch>=2.13
+transformers>=5.19
+sentence-transformers>=6.1
+peft>=0.21
+datasets>=5.0
+accelerate>=1.15
+huggingface_hub
+numpy
+pandas
+pyarrow
+scipy
+matplotlib
+openai
+python-dotenv
+jupyterlab
+ipykernel
