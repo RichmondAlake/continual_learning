@@ -1,9 +1,9 @@
-"""Copy the token-space notebooks from a MemoRizz checkout into self_improving_agents/.
+"""Copy the token-space notebooks from a MemoRizz checkout into part1/self_improving_agents/.
 
     python scripts/sync_token_space.py ~/Desktop/memorizz
 
 The five notebooks are written in the MemoRizz repository, in examples/continual_learning.
-This copies them with their images, and calderwood_world.py into both course folders, then makes
+This copies them with their images and calderwood_world.py, then makes
 two changes so they run outside that repository:
 
 1. The setup cell looked for MemoRizz's source tree above the notebook. Here MemoRizz is the
@@ -69,14 +69,12 @@ def main() -> None:
     if len(sys.argv) != 2:
         sys.exit(__doc__)
     source = Path(sys.argv[1]).expanduser() / "examples" / "continual_learning"
-    target = Path(__file__).resolve().parents[1] / "self_improving_agents"
-    target.mkdir(exist_ok=True)
+    target = Path(__file__).resolve().parents[1] / "part1" / "self_improving_agents"
+    target.mkdir(parents=True, exist_ok=True)
     for name in NOTEBOOKS:
         notebook = patch(json.loads((source / name).read_text()), name)
         (target / name).write_text(json.dumps(notebook, indent=1, ensure_ascii=False) + "\n")
-    for folder in (target, target.parent / "beyond_the_context_window"):   # one world for both courses
-        folder.mkdir(exist_ok=True)
-        shutil.copy2(source / "calderwood_world.py", folder / "calderwood_world.py")
+    shutil.copy2(source / "calderwood_world.py", target / "calderwood_world.py")
     shutil.copytree(source / "images", target / "images", dirs_exist_ok=True)
     print(f"copied {len(NOTEBOOKS)} notebooks, calderwood_world.py and images/ into {target}")
 

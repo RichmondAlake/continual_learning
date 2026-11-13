@@ -12,7 +12,8 @@ runs/
 checkpoints/
 models/
 
-# Weight-space notebooks: trained weights and trainer scratch (datasets/ is small and committed)
+# Trained weights and adapters (the weight-space notebooks save to adapters/)
+adapters/
 *.safetensors
 *.pt
 *.bin
