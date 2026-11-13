@@ -23,5 +23,5 @@ setup cell installs Unsloth with a CUDA build of PyTorch, so these notebooks don
 ## The data
 
 `traces.jsonl`, `memory_units.jsonl`, `train.jsonl` and `eval.jsonl` are the same files as
-[`../../data/calderwood/`](../../data/calderwood/), where their generator and a description of each
+[`../data/calderwood/`](../data/calderwood/), where their generator and a description of each
 file are. They are copied here so each run finds them in its working folder.

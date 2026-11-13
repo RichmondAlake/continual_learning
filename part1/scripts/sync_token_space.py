@@ -1,4 +1,4 @@
-"""Copy the token-space notebooks from a MemoRizz checkout into part1/self_improving_agents/.
+"""Copy the token-space notebooks from a MemoRizz checkout into self_improving_agents/ (in part1/).
 
     python scripts/sync_token_space.py ~/Desktop/memorizz
 
@@ -69,7 +69,7 @@ def main() -> None:
     if len(sys.argv) != 2:
         sys.exit(__doc__)
     source = Path(sys.argv[1]).expanduser() / "examples" / "continual_learning"
-    target = Path(__file__).resolve().parents[1] / "part1" / "self_improving_agents"
+    target = Path(__file__).resolve().parents[1] / "self_improving_agents"
     target.mkdir(parents=True, exist_ok=True)
     for name in NOTEBOOKS:
         notebook = patch(json.loads((source / name).read_text()), name)

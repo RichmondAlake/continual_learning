@@ -5,7 +5,7 @@ Companion notebooks for the [O'Reilly live course](https://learning.oreilly.com/
 Five notebooks on how an agent gets better at its job without anyone touching the model's weights.
 What changes is the *tokens* the harness puts in front of the model (skills, persona, facts, tool
 descriptions), so every lesson is something you can read, review, measure and undo. The agent is Ada,
-Calderwood Insurance's claims support assistant (see the [repository README](../../README.md)), built with
+Calderwood Insurance's claims support assistant (see the [Part 1 README](../README.md)), built with
 [MemoRizz](https://github.com/RichmondAlake/memorizz) as the intelligence plane: the layer that decides
 what an agent knows, remembers and learns.
 
@@ -34,14 +34,14 @@ In notebook 01, the sections marked ⭐ are the ones shown live.
 ## Run them
 
 ```bash
-source ../../.venv/bin/activate
+source ../.venv/bin/activate
 export MEMORIZZ_SRC=~/memorizz/src     # until the MemoRizz release after 0.17.24 is on PyPI
 jupyter lab
 ```
 
-The key comes from the environment or the `.env` file at the repository root. Each notebook writes its
+The key comes from the environment or the `.env` file in `part1/`. Each notebook writes its
 memory to `calderwood_store/` beside it, so you can open its runs in the MemoRizz UI; a cell near the
 end of each notebook prints the command.
 
 These copies come from the MemoRizz repository's `examples/continual_learning`. To refresh them after
-a MemoRizz change, run `python scripts/sync_token_space.py <path to memorizz>` from the repository root.
+a MemoRizz change, run `python scripts/sync_token_space.py <path to memorizz>` from `part1/`.
